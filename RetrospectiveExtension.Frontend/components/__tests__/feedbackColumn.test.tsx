@@ -29,16 +29,28 @@ describe('Feedback Column ', () => {
       expect(feedbackItemProps.accentColor).toEqual(expectedAccentColor);
     });
 
-    it('should render with original column accent color when the column ids are different', () => {
+    it('should render with original column accent color when the columnName is All', () => {
       const columnItem: IColumnItem = testColumnProps.columnItems[0];
       const expectedAccentColor: string = testColumnProps.columns[columnItem.feedbackItem.originalColumnId]?.columnProperties?.accentColor;
 
       testColumnProps.accentColor = 'someOtherColor';
-      testColumnProps.columnId = 'some-other-column-uuid';
+      testColumnProps.columnId = 'all-column-uuid';
+      testColumnProps.columnName = 'All';
 
       const feedbackItemProps = FeedbackColumn.createFeedbackItemProps(testColumnProps, testColumnProps.columnItems[0], true);
 
       expect(feedbackItemProps.accentColor).toEqual(expectedAccentColor);
+    });
+
+    it('should render with new column accent color when the columnName is not All', () => {
+      const originalColor: string = testColumnProps.accentColor;
+      testColumnProps.accentColor = 'someOtherColor';
+      testColumnProps.columnId = 'some-other-column-uuid';
+      testColumnProps.columnName = 'someOtherColumn';
+
+      const feedbackItemProps = FeedbackColumn.createFeedbackItemProps(testColumnProps, testColumnProps.columnItems[0], true);
+
+      expect(feedbackItemProps.accentColor).toEqual(originalColor);
     });
   })
 
