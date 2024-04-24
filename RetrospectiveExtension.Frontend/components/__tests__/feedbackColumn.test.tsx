@@ -34,6 +34,7 @@ describe('Feedback Column ', () => {
       const expectedAccentColor: string = testColumnProps.columns[columnItem.feedbackItem.originalColumnId]?.columnProperties?.accentColor;
 
       testColumnProps.accentColor = 'someOtherColor';
+      testColumnProps.columnId = 'some-other-column-uuid';
       testColumnProps.columnName = 'All';
 
       const feedbackItemProps = FeedbackColumn.createFeedbackItemProps(testColumnProps, testColumnProps.columnItems[0], true);
